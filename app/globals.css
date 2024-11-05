@@ -5,6 +5,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --background-color-blue: #1463a9;
+    margin: 0;
+    padding: 0;
+
+}
+
+html,body{
+  height: 100dvh;
 }
 
 @media (prefers-color-scheme: dark) {
