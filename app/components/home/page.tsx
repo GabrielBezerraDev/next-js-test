@@ -1,15 +1,22 @@
 'use client'
 
+import { AppContext } from '@/app/context/AppContext';
 import styleHome from './home.module.css';
-import { MutableRefObject, useContext, useRef } from 'react';
-import { HeaderContext } from '../header/header';
+import { MutableRefObject, useContext, useEffect, useRef } from 'react';
+import { RegexUtils } from '@/app/utils/regex';
 
 
 export default function HomeComponent(){
-
-    let headerContext = useContext(HeaderContext);
-    console.log(headerContext);
+    
+    let {data} = useContext(AppContext);
     let mainContent: MutableRefObject<null | HTMLElement> = useRef(null);
+    useEffect(() => {
+        if(mainContent.current){
+            console.log(data?.footerHeight);
+            mainContent.current.style.height = `calc(100dvh - ${data?.heightHeader + data?.footerHeight}px)`;
+            mainContent.current.style.marginTop = `${data?.heightHeader}px`;
+        }
+    },[data]);
 
     return (
         <main ref={mainContent} className={styleHome.content}>

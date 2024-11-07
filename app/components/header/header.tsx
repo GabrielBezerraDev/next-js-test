@@ -1,23 +1,31 @@
 'use client'
 
-import { Context,MutableRefObject,useLayoutEffect, useRef, useState } from 'react';
+import { Context,MutableRefObject,useLayoutEffect, useRef, useState, useContext, useEffect } from 'react';
 import styleHeader from './header.module.css';
 import { createContext } from 'react';
+import { AppContext } from '@/app/context/AppContext';
+import { RegexUtils } from '@/app/utils/regex';
 
-export const HeaderContext: Context<null | string> = createContext<null | string>(null); 
 
 export function Header(){
 
-    const [height,setHeight] = useState('');
+    let {updateState} = useContext(AppContext);
+
+    
+    const [height,setHeight] = useState(0);
+
 
     const headerElement:MutableRefObject<null | HTMLElement> = useRef<null | HTMLElement>(null);
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (headerElement.current) {
-            setHeight(getComputedStyle(headerElement.current).height);
+            setHeight(RegexUtils.regexGetOnlyNumbers(getComputedStyle(headerElement.current).height));
+            updateState({
+                data: {heightHeader: height}
+            })    
         }
-    }, []);
+    }, [height]);
+
     return (
-        <HeaderContext.Provider value={height}>
         <header ref={headerElement} className={styleHeader.header}>
             <div className={styleHeader.section1}>
                 <img className={styleHeader.img} src='flex.png'></img>
@@ -28,6 +36,5 @@ export function Header(){
                 </p>
             </div>
         </header>
-        </HeaderContext.Provider>
     );
 }

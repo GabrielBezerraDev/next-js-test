@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Header } from "./components/header/header";
 import Footer from "./components/footer/footer";
+import { AppContext } from "./context/AppContext";
+import { AppContextProvider } from "./context/Provider";
 
 
 const geistSans = localFont({
@@ -31,9 +33,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header></Header>
-        {children}
-        <Footer></Footer>
+        <AppContextProvider>
+          <Header></Header>
+          {children}
+          <Footer></Footer>
+        </AppContextProvider>
       </body>
     </html>
   );
