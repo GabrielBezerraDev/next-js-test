@@ -9,7 +9,7 @@ import { RegexUtils } from '@/app/utils/regex';
 
 export function Header(){
 
-    let {updateState} = useContext(AppContext);
+    let {data,setUpdate} = useContext(AppContext);
 
     
     const [height,setHeight] = useState(0);
@@ -17,13 +17,11 @@ export function Header(){
 
     const headerElement:MutableRefObject<null | HTMLElement> = useRef<null | HTMLElement>(null);
     useEffect(() => {
-        if (headerElement.current) {
+        if (data && setUpdate && headerElement.current && !data.heightHeader) {
             setHeight(RegexUtils.regexGetOnlyNumbers(getComputedStyle(headerElement.current).height));
-            updateState({
-                data: {heightHeader: height}
-            })    
+            setUpdate({data:{...data,heightHeader:height}})    
         }
-    }, [height]);
+    }, [data]);
 
     return (
         <header ref={headerElement} className={styleHeader.header}>

@@ -5,17 +5,15 @@ import { AppContext } from '@/app/context/AppContext';
 import { RegexUtils } from '@/app/utils/regex';
 
 export default function Footer(){
-    let {updateState} = useContext(AppContext);
-    const [footer, setFooterHeight ] = useState(20);
+    let {data,setUpdate} = useContext(AppContext);
+    const [footer, setFooterHeight ] = useState(0);
     let teste = useRef<null|HTMLElement>(null);
     useEffect(() => {
-        setFooterHeight(RegexUtils.regexGetOnlyNumbers(getComputedStyle(teste.current as HTMLElement).height));
-        updateState({
-            data: {
-                footerHeight: footer
-            }
-        });
-    },[footer])
+        if(data && setUpdate && teste.current && !data.footerHeight){
+            setFooterHeight(RegexUtils.regexGetOnlyNumbers(getComputedStyle(teste.current as HTMLElement).height));
+            setUpdate({data:{...data,footerHeight:footer}});
+        }
+    },[data])
 
     return (
         <footer ref={teste} className={styleFooter.footer}>

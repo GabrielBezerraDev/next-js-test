@@ -1,20 +1,14 @@
 'use client'
 import React, { useState } from 'react'
-import { AppState, AppContext } from './AppContext'
+import { AppState, AppContext} from './AppContext'
 
 interface Props {
   children: React.ReactNode
 }
 
 export const AppContextProvider: React.FunctionComponent<Props> = (props: Props): JSX.Element => {
-
-  const [state, setState] = useState({})
-
-  const updateState = (newState: Partial<AppState>) => {
-    setState({ ...state, ...newState })
-  }
-
+  const [data, setUpdate] = useState<Partial<AppState>>({data:{nome:"Gabriel"}});
   return (
-    <AppContext.Provider value={{ ...state, updateState }}>{props.children}</AppContext.Provider>
+    <AppContext.Provider value={{ ...data, setUpdate }}>{props.children}</AppContext.Provider>
   )
 }

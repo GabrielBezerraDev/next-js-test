@@ -1,15 +1,10 @@
 import React from 'react'
 
-type IGenericData = Record<any,any>;
+export type IGenericData = Record<any,any>;
 
 export interface AppState {
   data?: IGenericData
-  updateState: (newState: Partial<AppState>) => void
+  setUpdate: (data:IGenericData) => void
 }
 
-const defaultState: AppState = {
-  data: {},
-  updateState: (newState?: Partial<AppState>) => {},
-}
-
-export const AppContext = React.createContext<AppState>(defaultState)
+export const AppContext = React.createContext<Partial<AppState>>({})
