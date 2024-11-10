@@ -12,8 +12,8 @@
 
 html,body{
   min-height: 100dvh;
-  height: fit-content;
   max-width: 100dvw;
+  overflow-y: auto;
 }
 
 @media (prefers-color-scheme: dark) {

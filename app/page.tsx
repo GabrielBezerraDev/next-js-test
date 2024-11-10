@@ -8,7 +8,7 @@ export default function ContentPage(){
   return (
     <AppContextProvider>
         <Header></Header>
-        <MainComponent></MainComponent>
+          <MainComponent></MainComponent>
         <Footer></Footer>
     </AppContextProvider>
 
