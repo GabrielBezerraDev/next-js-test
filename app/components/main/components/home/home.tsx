@@ -7,7 +7,6 @@ interface HomeComponentProps {
     styleData: Record<string,any>;  // Definindo o tipo da prop styleData
 }
 
-
 export const HomeComponent: React.FC<HomeComponentProps> = ({ styleData }) => { 
     const teste = useRef<HTMLDivElement>(null);
     useEffect(() => {

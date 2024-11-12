@@ -19,5 +19,7 @@ export default function MainComponent(){
 
 
 
-    return cache ? (<HomeComponent styleData={{marginTop: marginTop,minHeight:minHeight}}/> ) : (<AuthComponent styleData={{marginTop:marginTop,minHeight:minHeight}}/>);
+    return cache ? 
+    (<HomeComponent styleData={{marginTop: marginTop,minHeight:minHeight}}/> ) :
+    (<AuthComponent styleData={{marginTop:marginTop,minHeight:minHeight}}/>);
 }
